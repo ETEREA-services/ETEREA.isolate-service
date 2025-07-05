@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant User
+    participant CompletarFaltantesController
+    participant CompletarFaltantesService
+    participant ClienteMovimientoClient
+    participant ArticuloClient
+    participant FacturacionClient
+
+    User->>CompletarFaltantesController: GET /api/isolate/completarFaltantes/complete/{...}
+    CompletarFaltantesController->>CompletarFaltantesService: completarFaltantes(...)
+    CompletarFaltantesService->>ClienteMovimientoClient: findAllFacturasByRango(...)
+    ClienteMovimientoClient-->>CompletarFaltantesService: List<ClienteMovimientoDto>
+    loop Para cada factura faltante
+        CompletarFaltantesService->>CompletarFaltantesService: generarFaltante(numero, fecha)
+        CompletarFaltantesService->>ArticuloClient: findByArticuloId(...)
+        ArticuloClient-->>CompletarFaltantesService: ArticuloDto
+        CompletarFaltantesService->>FacturacionClient: registrarTransaccionFacturaFaltante(...)
+        FacturacionClient-->>CompletarFaltantesService: ClienteMovimientoDto
+    end
+    CompletarFaltantesService-->>CompletarFaltantesController: "Completado"
+    CompletarFaltantesController-->>User: ResponseEntity("Completado", OK)

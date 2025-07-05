@@ -1,15 +1,22 @@
 # Eterea Isolate Service
 
+![Java](https://img.shields.io/badge/java-24-blue.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen.svg)
+![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-yellow.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/com.termascacheuta/eterea-isolate-service.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.termascacheuta%22%20AND%20a:%22eterea-isolate-service%22)
+
 ## Overview
-Eterea Isolate Service is a microservice built with Spring Boot that provides isolation and data management functionality for the Eterea system. It's designed to handle various business operations including invoice management, client movements, and article management.
+Eterea Isolate Service is a lightweight, standalone Spring Boot microservice designed to run occasional or specific processes on the Eterea ecosystem without requiring a full redeployment of the main services.
+
+This approach allows for greater flexibility and agility when performing maintenance tasks, data migrations, or executing batch processes that are not part of the core, real-time business logic.
 
 ## Features
-- Invoice number sequence validation and completion
-- Client movement tracking
-- Article and stock management
-- Integration with core services via Feign clients
-- Eureka service discovery integration
-- OpenAPI documentation
+- **Process Isolation**: Run tasks in a separate environment, minimizing impact on the core production services.
+- **Flexibility**: Easily add new controllers and services for specific, one-off tasks.
+- **Invoice Management**: Includes functionality to validate and complete missing invoice number sequences.
+- **Integration**: Connects to core services via Feign clients to access necessary data and functionality.
+- **Service Discovery**: Integrates with Eureka for seamless communication within the microservices architecture.
+- **API Documentation**: Provides clear API documentation through OpenAPI.
 
 ## Technical Stack
 - Java 21
