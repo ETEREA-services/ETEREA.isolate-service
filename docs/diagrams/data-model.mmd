@@ -1,0 +1,69 @@
+classDiagram
+    class DatoUnaFacturaDto {
+        +ClienteMovimientoDto clienteMovimiento
+        +ArticuloMovimientoDto articuloMovimiento
+    }
+
+    class ClienteMovimientoDto {
+        +Long clienteMovimientoId
+        +Integer comprobanteId
+        +Integer puntoVenta
+        +long numeroComprobante
+        +OffsetDateTime fechaComprobante
+        +Long clienteId
+        +BigDecimal importe
+        +String letraComprobante
+        +ComprobanteDto comprobante
+        +ClienteDto cliente
+        +MonedaDto moneda
+    }
+
+    class ArticuloMovimientoDto {
+        +Long articuloMovimientoId
+        +Long clienteMovimientoId
+        +Integer centroStockId
+        +String articuloId
+        +BigDecimal cantidad
+        +BigDecimal precioUnitario
+        +ArticuloDto articulo
+    }
+
+    class ArticuloDto {
+        +String articuloId
+        +String descripcion
+        +BigDecimal precioVentaConIva
+        +Long cuentaVentas
+    }
+
+    class ClienteDto {
+        +Long clienteId
+        +String nombre
+        +String cuit
+    }
+
+    class ComprobanteDto {
+        +Integer comprobanteId
+        +String descripcion
+        +String letraComprobante
+        +CuentaDto cuenta
+    }
+    
+    class CuentaDto {
+        +Long numeroCuenta
+        +String nombre
+    }
+
+    class MonedaDto {
+        +Integer monedaId
+        +String nombre
+        +String simbolo
+    }
+
+    DatoUnaFacturaDto o-- "1" ClienteMovimientoDto
+    DatoUnaFacturaDto o-- "1" ArticuloMovimientoDto
+    ClienteMovimientoDto o-- "1" ComprobanteDto
+    ClienteMovimientoDto o-- "1" ClienteDto
+    ClienteMovimientoDto o-- "1" MonedaDto
+    ArticuloMovimientoDto o-- "1" ArticuloDto
+    ComprobanteDto o-- "1" CuentaDto
+    ArticuloMovimientoDto "1" -- "1" ClienteMovimientoDto : "relaciona a"

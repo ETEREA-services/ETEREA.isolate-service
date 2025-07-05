@@ -1,0 +1,20 @@
+graph TD
+    subgraph "Eterea Isolate Service"
+        A[CompletarFaltantesController] --> B(CompletarFaltantesService);
+    end
+
+    subgraph "External Services (Feign Clients)"
+        C[core-service/api/core/facturacion]
+        D[core-service/api/core/articulos]
+        E[core-service/api/core/clienteMovimientos]
+    end
+
+    B --> C;
+    B --> D;
+    B --> E;
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#ccf,stroke:#333,stroke-width:2px
+    style C fill:#9cf,stroke:#333,stroke-width:2px
+    style D fill:#9cf,stroke:#333,stroke-width:2px
+    style E fill:#9cf,stroke:#333,stroke-width:2px
