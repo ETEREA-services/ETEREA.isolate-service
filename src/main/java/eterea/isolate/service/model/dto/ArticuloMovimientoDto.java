@@ -1,13 +1,18 @@
 package eterea.isolate.service.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ArticuloMovimientoDto {
 
     private Long articuloMovimientoId;
@@ -19,9 +24,14 @@ public class ArticuloMovimientoDto {
     private Integer item = 0;
     private String articuloId;
     private Integer negocioId;
+
+    @Builder.Default
     private BigDecimal cantidad = BigDecimal.ZERO;
+    @Builder.Default
     private BigDecimal precioUnitario = BigDecimal.ZERO;
+    @Builder.Default
     private BigDecimal precioUnitarioSinIva = BigDecimal.ZERO;
+    @Builder.Default
     private BigDecimal precioUnitarioConIva = BigDecimal.ZERO;
     private Long numeroCuenta;
     private Byte iva105 = 0;
