@@ -19,9 +19,9 @@ This approach allows for greater flexibility and agility when performing mainten
 - **API Documentation**: Provides clear API documentation through OpenAPI.
 
 ## Technical Stack
-- Java 21
-- Spring Boot 3.4.4
-- Spring Cloud 2024.0.1
+- Java 24
+- Spring Boot 3.5.3
+- Spring Cloud 2025.0.0
 - Spring Cloud Netflix Eureka Client
 - Spring Cloud OpenFeign
 - Lombok
@@ -87,7 +87,7 @@ The service is configured through `bootstrap.yml` with the following key propert
    ```
 3. Run the application:
    ```bash
-   java -jar target/eterea-isolate-service-0.0.1-SNAPSHOT.jar
+   java -jar target/eterea-isolate-service-0.2.0.jar
    ```
 
 ### Docker Deployment
