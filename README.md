@@ -31,13 +31,21 @@ This approach allows for greater flexibility and agility when performing mainten
 ## Project Structure
 ```
 src/main/java/eterea/isolate/service/
+├── adapter/
+│   └── FacturacionAdapter.java
 ├── client/
-│   └── core/
-│       └── ClienteMovimientoClient.java
+│   ├── core/
+│   │   ├── ArticuloClient.java
+│   │   ├── ClienteMovimientoClient.java
+│   │   └── facade/
+│   │       ├── FacturacionClient.java
+│   │       └── TransaccionFacturaProgramaDiaClient.java
+│   └── pyafipws/
+│       └── FacturadorClient.java
 ├── configuration/
 │   └── IsolateServiceConfiguration.java
 ├── controller/
-│   └── CompletarFaltantesController.java
+│   └── RellenadorController.java
 ├── model/
 │   └── dto/
 │       ├── ArticuloDto.java
@@ -46,9 +54,11 @@ src/main/java/eterea/isolate/service/
 │       ├── ClienteMovimientoDto.java
 │       ├── ComprobanteDto.java
 │       ├── CuentaDto.java
+│       ├── DatoUnaFacturaDto.java
+│       ├── FacturaResponseDto.java
 │       └── MonedaDto.java
 ├── service/
-│   ├── CompletarFaltantesService.java
+│   ├── RellenadorService.java
 │   └── miscelaneos/
 │       └── ToolService.java
 └── IsolateServiceApplication.java
@@ -62,8 +72,8 @@ The service is configured through `bootstrap.yml` with the following key propert
 - Feign client timeouts
 
 ## API Endpoints
-### Completar Faltantes
-- **Endpoint**: `/api/isolate/completarFaltantes/complete/{letraComprobante}/{puntoVenta}/{numeroComprobanteDesde}/{numeroComprobanteHasta}`
+### Rellenador
+- **Endpoint**: `/api/isolate/rellenador/complete/{letraComprobante}/{puntoVenta}/{numeroComprobanteDesde}/{numeroComprobanteHasta}`
 - **Method**: GET
 - **Description**: Validates and completes missing invoice numbers in a given range
 - **Parameters**:
@@ -75,7 +85,7 @@ The service is configured through `bootstrap.yml` with the following key propert
 ## Building and Running
 
 ### Prerequisites
-- JDK 21
+- JDK 24
 - Maven 3.9.9 or later
 - Docker (optional, for containerized deployment)
 
@@ -87,7 +97,7 @@ The service is configured through `bootstrap.yml` with the following key propert
    ```
 3. Run the application:
    ```bash
-   java -jar target/eterea-isolate-service-0.2.0.jar
+   java -jar target/eterea-isolate-service-0.3.0.jar
    ```
 
 ### Docker Deployment
@@ -116,3 +126,5 @@ docker run -p 8080:8080 eterea-isolate-service
 4. Push to the branch
 5. Create a Pull Request
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

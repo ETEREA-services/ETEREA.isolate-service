@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.termascacheuta</groupId>
     <artifactId>eterea-isolate-service</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>eterea.isolate-service</name>
     <description>eterea.isolate-service</description>
     <url/>
