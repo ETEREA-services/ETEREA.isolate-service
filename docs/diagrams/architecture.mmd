@@ -1,20 +1,23 @@
 graph TD
     subgraph "Eterea Isolate Service"
-        A[CompletarFaltantesController] --> B(CompletarFaltantesService);
+        A[RellenadorController] --> B(RellenadorService);
     end
 
     subgraph "External Services (Feign Clients)"
-        C[core-service/api/core/facturacion]
-        D[core-service/api/core/articulos]
-        E[core-service/api/core/clienteMovimientos]
+        C[pyafipws/facturador]
+        D[core-service/api/core/clienteMovimientos]
+        E[import-service/api/import/orderNote]
+        F[core-service/api/core/transaccionFacturaProgramaDia]
     end
 
     B --> C;
     B --> D;
     B --> E;
+    B --> F;
 
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style B fill:#ccf,stroke:#333,stroke-width:2px
     style C fill:#9cf,stroke:#333,stroke-width:2px
     style D fill:#9cf,stroke:#333,stroke-width:2px
     style E fill:#9cf,stroke:#333,stroke-width:2px
+    style F fill:#9cf,stroke:#333,stroke-width:2px

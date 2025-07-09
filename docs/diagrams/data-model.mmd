@@ -59,6 +59,65 @@ classDiagram
         +String simbolo
     }
 
+    class FacturacionDto {
+        +Integer tipoDocumento
+        +String documento
+        +Integer tipoAfip
+        +Integer puntoVenta
+        +BigDecimal total
+        +BigDecimal exento
+        +BigDecimal neto
+        +BigDecimal neto105
+        +BigDecimal iva
+        +BigDecimal iva105
+        +String resultado
+        +String cae
+        +String vencimientoCae
+        +Long numeroComprobante
+        +String fechaComprobante
+        +Integer asociadoTipoAfip
+        +Integer asociadoPuntoVenta
+        +Long asociadoNumeroComprobante
+        +String asociadoFechaComprobante
+        +Integer idCondicionIva
+    }
+
+    class OrderNoteDto {
+        +Long orderNumberId
+        +String orderStatus
+        +OffsetDateTime orderDate
+        +List<ProductDto> products
+        +PaymentDto payment
+    }
+
+    class PaymentDto {
+        +Long orderNumberId
+        +String transaccionComercioId
+        +String transaccionPlataformaId
+        +InformacionPagadorDto informacionPagador
+        +List<ProductTransactionDto> productTransactions
+    }
+
+    class ProductDto {
+        +Long productId
+        +Long orderNumberId
+        +String sku
+        +String name
+        +Integer qty
+    }
+
+    class ProductTransactionDto {
+        +Long productTransactionId
+        +Long orderNumberId
+        +String nombreProducto
+    }
+
+    class InformacionPagadorDto {
+        +Long orderNumberId
+        +String eMail
+        +String nombre
+    }
+
     DatoUnaFacturaDto o-- "1" ClienteMovimientoDto
     DatoUnaFacturaDto o-- "1" ArticuloMovimientoDto
     ClienteMovimientoDto o-- "1" ComprobanteDto
@@ -67,3 +126,7 @@ classDiagram
     ArticuloMovimientoDto o-- "1" ArticuloDto
     ComprobanteDto o-- "1" CuentaDto
     ArticuloMovimientoDto "1" -- "1" ClienteMovimientoDto : "relaciona a"
+    OrderNoteDto o-- "*" ProductDto
+    OrderNoteDto o-- "1" PaymentDto
+    PaymentDto o-- "1" InformacionPagadorDto
+    PaymentDto o-- "*" ProductTransactionDto

@@ -1,21 +1,27 @@
 sequenceDiagram
     participant User
-    participant CompletarFaltantesController
-    participant CompletarFaltantesService
+    participant RellenadorController
+    participant RellenadorService
+    participant FacturadorClient
     participant ClienteMovimientoClient
-    participant ArticuloClient
-    participant FacturacionClient
+    participant OrderNoteClient
+    participant TransaccionFacturaProgramaDiaClient
 
-    User->>CompletarFaltantesController: GET /api/isolate/completarFaltantes/complete/{...}
-    CompletarFaltantesController->>CompletarFaltantesService: completarFaltantes(...)
-    CompletarFaltantesService->>ClienteMovimientoClient: findAllFacturasByRango(...)
-    ClienteMovimientoClient-->>CompletarFaltantesService: List<ClienteMovimientoDto>
-    loop Para cada factura faltante
-        CompletarFaltantesService->>CompletarFaltantesService: generarFaltante(numero, fecha)
-        CompletarFaltantesService->>ArticuloClient: findByArticuloId(...)
-        ArticuloClient-->>CompletarFaltantesService: ArticuloDto
-        CompletarFaltantesService->>FacturacionClient: registrarTransaccionFacturaFaltante(...)
-        FacturacionClient-->>CompletarFaltantesService: ClienteMovimientoDto
+    User->>RellenadorController: GET /api/isolate/rellenador/auto-completa/{...}
+    RellenadorController->>RellenadorService: autoCompleta(...)
+    RellenadorService->>FacturadorClient: consultaComprobante(...)
+    FacturadorClient-->>RellenadorService: FacturaResponseDto
+    RellenadorService->>ClienteMovimientoClient: findByComprobante(...)
+    alt Comprobante NO existe
+        ClienteMovimientoClient-->>RellenadorService: Exception
+        RellenadorService->>OrderNoteClient: findLastByNumeroDocumento(...)
+        OrderNoteClient-->>RellenadorService: OrderNoteDto
+        alt Importe ARCA == OrderNote
+            RellenadorService->>TransaccionFacturaProgramaDiaClient: registroTransaccionFacturaProgramaDia(...)
+            TransaccionFacturaProgramaDiaClient-->>RellenadorService: void
+        end
+    else Comprobante SI existe
+        ClienteMovimientoClient-->>RellenadorService: ClienteMovimientoDto
     end
-    CompletarFaltantesService-->>CompletarFaltantesController: "Completado"
-    CompletarFaltantesController-->>User: ResponseEntity("Completado", OK)
+    RellenadorService-->>RellenadorController: void
+    RellenadorController-->>User: ResponseEntity(OK)
