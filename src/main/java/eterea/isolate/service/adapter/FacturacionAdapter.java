@@ -34,6 +34,10 @@ public class FacturacionAdapter {
             builder.vencimientoCae(source.getFchVencCae().format(DATE_FORMATTER));
         }
 
+        if (source.getFechaCbte() != null) {
+            builder.fechaComprobante(source.getFechaCbte().format(DATE_FORMATTER));
+        }
+
         // Los campos sin correspondencia directa se inicializan con valores por defecto en el DTO
         // gracias a @Builder.Default o la inicialización directa en el campo.
 

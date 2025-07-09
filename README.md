@@ -97,7 +97,7 @@ The service is configured through `bootstrap.yml` with the following key propert
    ```
 3. Run the application:
    ```bash
-   java -jar target/eterea-isolate-service-0.3.0.jar
+   java -jar target/eterea-isolate-service-0.4.0.jar
    ```
 
 ### Docker Deployment
