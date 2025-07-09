@@ -46,6 +46,10 @@ public class RellenadorService {
         }
         var orderNote = orderNoteClient.findLastByNumeroDocumento(facturaArca.getFactura().getNroDoc());
         logOrderNote(orderNote);
+        if (facturaArca.getFactura().getImpTotal().compareTo(orderNote.getPayment().getMonto()) != 0) {
+            log.debug("Error. Importe ARCA diferente OrderNote");
+            return;
+        }
         transaccionFacturaProgramaDiaClient.registroTransaccionFacturaProgramaDia(orderNote.getOrderNumberId(), dryRun, FacturacionAdapter.toFacturacionDto(facturaArca));
     }
 
