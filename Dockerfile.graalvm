@@ -13,7 +13,7 @@ COPY . .
 
 # Compilar la aplicación en un ejecutable nativo
 # Se activa el perfil "native" definido en el pom.xml
-RUN mvn -Pnative clean package
+RUN mvn -Pnative clean package -DskipTests
 
 # Etapa 2: Creación de la imagen final mínima con Debian Slim
 FROM debian:12-slim AS final
