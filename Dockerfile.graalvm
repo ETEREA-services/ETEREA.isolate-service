@@ -23,7 +23,7 @@ RUN groupadd --system appgroup && useradd --system --gid appgroup --shell /bin/f
 USER appuser
 
 # Copiar el ejecutable nativo desde la etapa de compilación
-COPY --from=build /app/target/eterea.isolate-service /eterea.isolate-service
+COPY --from=build /app/target/eterea.programa-dia-service /eterea.programa-dia-service
 
 # Comando de entrada para ejecutar la aplicación
-ENTRYPOINT ["/eterea.isolate-service"]
+ENTRYPOINT ["/eterea.programa-dia-service"]

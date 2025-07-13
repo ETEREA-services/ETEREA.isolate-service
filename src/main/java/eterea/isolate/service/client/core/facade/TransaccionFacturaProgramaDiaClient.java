@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "core-service/api/core/transaccion-factura-programa-dia")
 public interface TransaccionFacturaProgramaDiaClient {
 
-    @PostMapping("/registro/{orderNumberId}/dry-run/{dryRun}")
-    void registroTransaccionFacturaProgramaDia(@PathVariable Long orderNumberId, @PathVariable Boolean dryRun, @RequestBody FacturacionDto facturacionDto);
+    @PostMapping("/registro/{orderNumberId}/solo-factura/{soloFactura}/dry-run/{dryRun}")
+    void registroTransaccionFacturaProgramaDia(@PathVariable Long orderNumberId, @PathVariable Boolean soloFactura, @PathVariable Boolean dryRun, @RequestBody FacturacionDto facturacionDto);
 
 }
