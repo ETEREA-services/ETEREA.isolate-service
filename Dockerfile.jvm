@@ -28,11 +28,11 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /app
 
 # Copiamos el JAR generado desde la etapa de compilación
-# El pom.xml define <finalName>eterea.import-service</finalName>
-COPY --from=build /app/target/eterea.import-service.jar ./eterea.import-service.jar
+# El pom.xml define <finalName>eterea.isolate-service</finalName>
+COPY --from=build /app/target/eterea.isolate-service.jar ./eterea.isolate-service.jar
 
 # Cambiamos al usuario no privilegiado
 USER appuser
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "eterea.import-service.jar"]
+ENTRYPOINT ["java", "-jar", "eterea.isolate-service.jar"]
