@@ -33,7 +33,7 @@ public class RellenadorService {
         return facturadorClient.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
     }
 
-    public void autoCompleta(Integer tipoAfipId, Integer puntoVenta, Long numeroComprobante, Boolean dryRun) {
+    public void autoCompleta(Integer tipoAfipId, Integer puntoVenta, Long numeroComprobante, Boolean soloFactura, Boolean dryRun) {
         var facturaArca = facturadorClient.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
         logFacturaArca(facturaArca);
         try {
@@ -50,7 +50,12 @@ public class RellenadorService {
             log.debug("Error. Importe ARCA diferente OrderNote");
             return;
         }
-        transaccionFacturaProgramaDiaClient.registroTransaccionFacturaProgramaDia(orderNote.getOrderNumberId(), dryRun, FacturacionAdapter.toFacturacionDto(facturaArca));
+        transaccionFacturaProgramaDiaClient.registroTransaccionFacturaProgramaDia(
+                orderNote.getOrderNumberId(),
+                soloFactura,
+                dryRun,
+                FacturacionAdapter.toFacturacionDto(facturaArca)
+        );
     }
 
     private void logOrderNote(OrderNoteDto orderNote) {
