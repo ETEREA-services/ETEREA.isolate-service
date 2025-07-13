@@ -13,12 +13,17 @@ eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
+    refresh:
+      enabled: false
     service-url:
       defaultZone: http://eureka:@eureka-service:${app.eureka}/eureka
 
 spring:
   application:
     name: isolate-service
+  autoconfigure:
+    exclude: org.springframework.cloud.autoconfigure.RefreshAutoConfiguration
+
 
 logging:
   level:
