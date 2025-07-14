@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "core-service/api/core/transaccion-factura-programa-dia")
+@FeignClient(name = "core-service/api/core/transaccion-factura-programa-dia", contextId = "transaccionFacturaProgramaDiaClient")
 public interface TransaccionFacturaProgramaDiaClient {
 
     @PostMapping("/registro/{orderNumberId}/solo-factura/{soloFactura}/dry-run/{dryRun}")

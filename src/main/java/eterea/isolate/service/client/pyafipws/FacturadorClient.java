@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "pyafipws-service/api/afipws")
+@FeignClient(name = "pyafipws-service/api/afipws", contextId = "facturadorClient")
 public interface FacturadorClient {
 
     @GetMapping("/consulta_comprobante")

@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "core-service/api/core/facturacion")
+@FeignClient(name = "core-service/api/core/facturacion", contextId = "facturacionClient")
 public interface FacturacionClient {
 
     @PostMapping("/registrarTransaccionFacturaFaltante")
