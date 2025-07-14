@@ -5,6 +5,10 @@
 ![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-yellow.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/com.termascacheuta/eterea-isolate-service.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.termascacheuta%22%20AND%20a:%22eterea-isolate-service%22)
 
+## Novedades en la versión 0.5.0
+
+- **Soporte experimental para despliegue nativo:** Ahora es posible construir una imagen nativa usando GraalVM, lo que permite tiempos de arranque más rápidos y menor consumo de memoria. Consulta el `Dockerfile.graalvm` para más detalles.
+
 ## Overview
 Eterea Isolate Service is a lightweight, standalone Spring Boot microservice designed to run occasional or specific processes on the Eterea ecosystem without requiring a full redeployment of the main services.
 
@@ -19,6 +23,7 @@ This approach allows for greater flexibility and agility when performing mainten
 - **API Documentation**: Provides clear API documentation through OpenAPI.
 
 ## Technical Stack
+...existing code...
 - Java 24
 - Spring Boot 3.5.3
 - Spring Cloud 2025.0.0
@@ -27,6 +32,7 @@ This approach allows for greater flexibility and agility when performing mainten
 - Lombok
 - Caffeine Cache
 - SpringDoc OpenAPI
+- **GraalVM Native Image (experimental)**
 
 ## Project Structure
 ```

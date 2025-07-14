@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient("import-service/api/import/orderNote")
+@FeignClient(name = "import-service/api/import/orderNote", contextId = "orderNoteClient")
 public interface OrderNoteClient {
 
     @GetMapping("/{orderNumberId}")
