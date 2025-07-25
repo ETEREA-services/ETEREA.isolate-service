@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2025-07-15
+### Added
+- feat(model): Añadido `ProductDto` para representar información de productos en el sistema.
+### Changed
+- chore(docs): Actualización de la documentación (README) para reflejar el uso de Consul, la nueva estructura de directorios y la versión actual del proyecto.
+
 ## [0.5.0] - 2025-07-14
 ### Added
 - feat: Soporte experimental para despliegue nativo con GraalVM (`Dockerfile.graalvm`, configuración en `pom.xml`)
