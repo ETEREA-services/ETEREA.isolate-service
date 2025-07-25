@@ -19,7 +19,7 @@ This approach allows for greater flexibility and agility when performing mainten
 - **Flexibility**: Easily add new controllers and services for specific, one-off tasks.
 - **Invoice Management**: Includes functionality to validate and complete missing invoice number sequences.
 - **Integration**: Connects to core services via Feign clients to access necessary data and functionality.
-- **Service Discovery**: Integrates with Eureka for seamless communication within the microservices architecture.
+- **Service Discovery**: Integrates with Consul for seamless communication within the microservices architecture.
 - **API Documentation**: Provides clear API documentation through OpenAPI.
 
 ## Technical Stack
@@ -27,7 +27,7 @@ This approach allows for greater flexibility and agility when performing mainten
 - Java 24
 - Spring Boot 3.5.3
 - Spring Cloud 2025.0.0
-- Spring Cloud Netflix Eureka Client
+- Spring Cloud Consul Discovery
 - Spring Cloud OpenFeign
 - Lombok
 - Caffeine Cache
@@ -50,19 +50,22 @@ src/main/java/eterea/isolate/service/
 │       └── FacturadorClient.java
 ├── configuration/
 │   └── IsolateServiceConfiguration.java
-├── controller/
-│   └── RellenadorController.java
-├── model/
-│   └── dto/
-│       ├── ArticuloDto.java
-│       ├── ArticuloMovimientoDto.java
-│       ├── ClienteDto.java
-│       ├── ClienteMovimientoDto.java
-│       ├── ComprobanteDto.java
-│       ├── CuentaDto.java
-│       ├── DatoUnaFacturaDto.java
-│       ├── FacturaResponseDto.java
-│       └── MonedaDto.java
+├── controller/ 
+│   └── RellenadorController.java 
+├── model/ 
+│   └── dto/ 
+│       ├── core/
+│       │   └── FacturacionDto.java
+│       ├── web/
+│       │   └── ProductDto.java
+│       ├── ArticuloDto.java 
+│       ├── ArticuloMovimientoDto.java 
+│       ├── ClienteDto.java 
+│       ├── ClienteMovimientoDto.java 
+│       ├── ComprobanteDto.java 
+│       ├── CuentaDto.java 
+│       ├── DatoUnaFacturaDto.java 
+│       └── FacturaResponseDto.java 
 ├── service/
 │   ├── RellenadorService.java
 │   └── miscelaneos/

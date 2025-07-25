@@ -1,6 +1,5 @@
 package eterea.isolate.service.service;
 
-import eterea.isolate.service.adapter.FacturacionAdapter;
 import eterea.isolate.service.client.core.ClienteMovimientoClient;
 import eterea.isolate.service.client.core.facade.TransaccionFacturaProgramaDiaClient;
 import eterea.isolate.service.client.pyafipws.FacturadorClient;

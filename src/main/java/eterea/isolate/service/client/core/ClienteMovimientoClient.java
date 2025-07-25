@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "core-service/api/core/clienteMovimiento", contextId = "clienteMovimientoClient")
+@FeignClient(name = "core-service", contextId = "clienteMovimientoClient", path = "/api/core/clienteMovimiento")
 public interface ClienteMovimientoClient {
 
     @GetMapping("/rango/facturas/{letraComprobante}/{debita}/{puntoVenta}/{numeroComprobanteDesde}/{numeroComprobanteHasta}")

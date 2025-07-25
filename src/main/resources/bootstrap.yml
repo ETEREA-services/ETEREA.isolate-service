@@ -1,29 +1,24 @@
 app:
   port: ${APP_PORT:8080}
-  eureka: 8761
   logging: debug
+  consul:
+    host: consul-service
+    port: 8500
 
 server:
   address: 0.0.0.0
   port: ${app.port}
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    refresh:
-      enabled: false
-    service-url:
-      defaultZone: http://eureka:@eureka-service:${app.eureka}/eureka
-
 spring:
   application:
     name: isolate-service
-  autoconfigure:
-    exclude: org.springframework.cloud.autoconfigure.RefreshAutoConfiguration
-
+  cloud:
+    consul:
+      host: ${app.consul.host}
+      port: ${app.consul.port}
+      discovery:
+        prefer-ip-address: true
+        tags: eterea,isolate
 
 logging:
   level:
