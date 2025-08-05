@@ -34,18 +34,26 @@ public class RellenadorService {
     }
 
     public void autoCompleta(Integer tipoAfipId, Integer puntoVenta, Long numeroComprobante, Boolean soloFactura, Boolean dryRun) {
+        log.debug("Processing RellenadorService.autoCompleta");
         var facturaArca = facturadorClient.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
-        logFacturaArca(facturaArca);
+        log.debug("FacturaArca -> {}", facturaArca.jsonify());
         try {
             var clienteMovimiento = clienteMovimientoClient.findByComprobante(853, puntoVenta, numeroComprobante);
-            logClienteMovimiento(clienteMovimiento);
-            log.debug("Error. Comprobante encontrado");
+            log.debug("ClienteMovimiento -> {}", clienteMovimiento.jsonify());
+            log.debug("\n\n\nError. Comprobante encontrado\n\n\n");
             return;
         } catch (Exception e) {
             log.debug("Ok. Comprobante no encontrado -> {}", e.getMessage());
         }
-        var orderNote = orderNoteClient.findLastByNumeroDocumento(facturaArca.getFactura().getNroDoc());
-        logOrderNote(orderNote);
+        log.debug("Buscando OrderNote . . .");
+        OrderNoteDto orderNote;
+        try {
+            orderNote = orderNoteClient.findLastByNumeroDocumentoAndImporte(facturaArca.getFactura().getNroDoc(), facturaArca.getFactura().getImpTotal());
+            log.debug("OrderNote -> {}", orderNote.jsonify());
+        } catch (Exception e) {
+            log.debug("\n\n\nNo fue posible encontrar un OrderNote\n\n\n");
+            return;
+        }
         if (facturaArca.getFactura().getImpTotal().compareTo(orderNote.getPayment().getMonto()) != 0) {
             log.debug("Error. Importe ARCA diferente OrderNote");
             return;
@@ -56,45 +64,6 @@ public class RellenadorService {
                 dryRun,
                 FacturacionAdapter.toFacturacionDto(facturaArca)
         );
-    }
-
-    private void logOrderNote(OrderNoteDto orderNote) {
-        try {
-            log.debug("OrderNote -> {}", JsonMapper
-                    .builder()
-                    .findAndAddModules()
-                    .build()
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(orderNote));
-        } catch (JsonProcessingException e) {
-            log.debug("OrderNote jsonify error -> {}", e.getMessage());
-        }
-    }
-
-    private void logClienteMovimiento(ClienteMovimientoDto clienteMovimiento) {
-        try {
-            log.debug("ClienteMovimiento -> {}", JsonMapper
-                    .builder()
-                    .findAndAddModules()
-                    .build()
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(clienteMovimiento));
-        } catch (JsonProcessingException e) {
-            log.debug("ClienteMovimiento jsonify error -> {}", e.getMessage());
-        }
-    }
-
-    private void logFacturaArca(FacturaResponseDto facturaArca) {
-        try {
-            log.debug("FacturaArca -> {}", JsonMapper
-                    .builder()
-                    .findAndAddModules()
-                    .build()
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(facturaArca));
-        } catch (JsonProcessingException e) {
-            log.debug("FacturaArca jsonify error -> {}", e.getMessage());
-        }
     }
 
 }

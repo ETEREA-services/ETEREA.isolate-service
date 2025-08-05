@@ -5,9 +5,10 @@
 ![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-yellow.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/com.termascacheuta/eterea-isolate-service.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.termascacheuta%22%20AND%20a:%22eterea-isolate-service%22)
 
-## Novedades en la versión 0.5.0
+## Novedades en la versión 0.6.0
 
-- **Soporte experimental para despliegue nativo:** Ahora es posible construir una imagen nativa usando GraalVM, lo que permite tiempos de arranque más rápidos y menor consumo de memoria. Consulta el `Dockerfile.graalvm` para más detalles.
+- **Nuevo Modelo de Datos:** Se introduce `ProductDto` para mejorar la representación de datos de productos en la capa web.
+- **Documentación Mejorada:** Actualización completa de la documentación para reflejar la arquitectura y configuración actuales, incluyendo el uso de Consul.
 
 ## Overview
 Eterea Isolate Service is a lightweight, standalone Spring Boot microservice designed to run occasional or specific processes on the Eterea ecosystem without requiring a full redeployment of the main services.
@@ -32,7 +33,6 @@ This approach allows for greater flexibility and agility when performing mainten
 - Lombok
 - Caffeine Cache
 - SpringDoc OpenAPI
-- **GraalVM Native Image (experimental)**
 
 ## Project Structure
 ```
@@ -76,7 +76,7 @@ src/main/java/eterea/isolate/service/
 ## Configuration
 The service is configured through `bootstrap.yml` with the following key properties:
 - Server port: Configurable via `APP_PORT` environment variable (default: 8080)
-- Eureka client configuration
+- Consul client configuration for service discovery
 - Logging levels
 - Feign client timeouts
 
@@ -106,21 +106,14 @@ The service is configured through `bootstrap.yml` with the following key propert
    ```
 3. Run the application:
    ```bash
-   java -jar target/eterea-isolate-service-0.4.0.jar
+   java -jar target/eterea.isolate-service.jar
    ```
-
-### Docker Deployment
-Build and run using Docker:
-```bash
-docker build -f Dockerfile.local -t eterea-isolate-service .
-docker run -p 8080:8080 eterea-isolate-service
-```
 
 ## Dependencies
 - Spring Boot Starter Web
 - Spring Boot Starter Validation
 - Spring Cloud Starter
-- Spring Cloud Netflix Eureka Client
+- Spring Cloud Consul Discovery
 - Spring Cloud OpenFeign
 - Spring Boot Starter Actuator
 - Spring Boot Starter HATEOAS

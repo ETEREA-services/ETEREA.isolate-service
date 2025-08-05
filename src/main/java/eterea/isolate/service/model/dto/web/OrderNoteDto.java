@@ -1,12 +1,18 @@
 package eterea.isolate.service.model.dto.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderNoteDto {
 
     private Long orderNumberId;
@@ -48,5 +54,18 @@ public class OrderNoteDto {
     private String orderNotes = "";
     private List<ProductDto> products;
     private PaymentDto payment;
+
+    public String jsonify() {
+        try {
+            return JsonMapper
+                    .builder()
+                    .findAndAddModules()
+                    .build()
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return "jsonify error {}" + e.getMessage();
+        }
+    }
 
 }
