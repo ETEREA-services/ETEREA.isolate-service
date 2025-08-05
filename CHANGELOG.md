@@ -5,11 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.6.0] - 2025-07-15
+## [0.6.0] - 2025-08-05
 ### Added
 - feat(model): Añadido `ProductDto` para representar información de productos en el sistema.
+- feat(controller): Nuevo endpoint para generación de nota de crédito (`NotaCreditoController`).
+- feat(service): Servicio `NotaCreditoService` para lógica de generación de notas de crédito.
+- feat(client): Nuevos Feign clients (`ComprobanteClient`, métodos extendidos en `OrderNoteClient`, `FacturacionClient`).
+
 ### Changed
-- chore(docs): Actualización de la documentación (README) para reflejar el uso de Consul, la nueva estructura de directorios y la versión actual del proyecto.
+- chore(deps): Actualización de Spring Boot a 3.5.4.
+- chore(config): Migración de Eureka a Consul en la configuración (`bootstrap.yml`, código).
+- chore(docs): Actualización de README y diagramas para reflejar la nueva arquitectura y dependencias.
+- refactor(service): Simplificación de logging y uso de métodos `jsonify` en DTOs.
+
+### Fixed
+- fix(test): Actualización de tests para reflejar nuevos métodos y dependencias.
 
 ## [0.5.0] - 2025-07-14
 ### Added

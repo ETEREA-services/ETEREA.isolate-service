@@ -1,3 +1,17 @@
+
+    participant NotaCreditoController
+    participant NotaCreditoService
+    participant ComprobanteClient
+    participant FacturacionClient
+
+    User->>NotaCreditoController: GET /api/isolate/nota-credito/from/factura/{...}/nota/credito/{...}
+    NotaCreditoController->>NotaCreditoService: generateNotaCredito(...)
+    NotaCreditoService->>ClienteMovimientoClient: findByFactura(...)
+    NotaCreditoService->>ComprobanteClient: findByComprobanteId(...)
+    NotaCreditoService->>FacturacionClient: registroNotaCreditoFromFactura(...)
+    FacturacionClient-->>NotaCreditoService: ClienteMovimientoDto
+    NotaCreditoService-->>NotaCreditoController: ClienteMovimientoDto
+    NotaCreditoController-->>User: ResponseEntity(OK)
 sequenceDiagram
     participant User
     participant RellenadorController

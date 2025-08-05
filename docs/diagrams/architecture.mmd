@@ -1,6 +1,7 @@
 graph TD
     subgraph "Eterea Isolate Service"
-        A[RellenadorController] --> B(RellenadorService);
+        A[RellenadorController] --> B(RellenadorService)
+        G[NotaCreditoController] --> H(NotaCreditoService)
     end
 
     subgraph "External Services (Feign Clients)"
@@ -8,16 +9,23 @@ graph TD
         D[core-service/api/core/clienteMovimientos]
         E[import-service/api/import/orderNote]
         F[core-service/api/core/transaccionFacturaProgramaDia]
+        I[core-service/api/core/comprobante]
     end
 
-    B --> C;
-    B --> D;
-    B --> E;
-    B --> F;
+    B --> C
+    B --> D
+    B --> E
+    B --> F
+    H --> D
+    H --> I
+    H --> F
 
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style B fill:#ccf,stroke:#333,stroke-width:2px
+    style G fill:#f9f,stroke:#333,stroke-width:2px
+    style H fill:#ccf,stroke:#333,stroke-width:2px
     style C fill:#9cf,stroke:#333,stroke-width:2px
     style D fill:#9cf,stroke:#333,stroke-width:2px
     style E fill:#9cf,stroke:#333,stroke-width:2px
     style F fill:#9cf,stroke:#333,stroke-width:2px
+    style I fill:#9cf,stroke:#333,stroke-width:2px

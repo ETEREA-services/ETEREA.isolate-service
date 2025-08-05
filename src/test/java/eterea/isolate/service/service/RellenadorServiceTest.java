@@ -70,7 +70,7 @@ class RellenadorServiceTest {
 
         when(facturadorClient.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante)).thenReturn(facturaArca);
         when(clienteMovimientoClient.findByComprobante(anyInt(), anyInt(), anyLong())).thenThrow(new RuntimeException("Not found"));
-        when(orderNoteClient.findLastByNumeroDocumento(nroDoc)).thenReturn(orderNote);
+        when(orderNoteClient.findLastByNumeroDocumentoAndImporte(nroDoc, amount)).thenReturn(orderNote);
         doNothing().when(transaccionFacturaProgramaDiaClient).registroTransaccionFacturaProgramaDia(anyLong(), anyBoolean(), anyBoolean(), any());
 
         // When
@@ -79,7 +79,7 @@ class RellenadorServiceTest {
         // Then
         verify(facturadorClient).consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
         verify(clienteMovimientoClient).findByComprobante(853, puntoVenta, numeroComprobante);
-        verify(orderNoteClient).findLastByNumeroDocumento(nroDoc);
+        verify(orderNoteClient).findLastByNumeroDocumentoAndImporte(nroDoc, amount);
         verify(transaccionFacturaProgramaDiaClient).registroTransaccionFacturaProgramaDia(eq(1L), eq(false), eq(false), any(eterea.isolate.service.model.dto.core.FacturacionDto.class));
     }
 
@@ -104,7 +104,7 @@ class RellenadorServiceTest {
 
         when(facturadorClient.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante)).thenReturn(facturaArca);
         when(clienteMovimientoClient.findByComprobante(anyInt(), anyInt(), anyLong())).thenThrow(new RuntimeException("Not found"));
-        when(orderNoteClient.findLastByNumeroDocumento(nroDoc)).thenReturn(orderNote);
+        when(orderNoteClient.findLastByNumeroDocumentoAndImporte(nroDoc, facturaArca.getFactura().getImpTotal())).thenReturn(orderNote);
 
         // When
         rellenadorService.autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, false, false);
@@ -112,7 +112,7 @@ class RellenadorServiceTest {
         // Then
         verify(facturadorClient).consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
         verify(clienteMovimientoClient).findByComprobante(853, puntoVenta, numeroComprobante);
-        verify(orderNoteClient).findLastByNumeroDocumento(nroDoc);
+        verify(orderNoteClient).findLastByNumeroDocumentoAndImporte(nroDoc, facturaArca.getFactura().getImpTotal());
         verifyNoInteractions(transaccionFacturaProgramaDiaClient);
     }
 }

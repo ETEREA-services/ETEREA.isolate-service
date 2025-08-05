@@ -1,8 +1,14 @@
 package eterea.isolate.service.model.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ComprobanteDto {
 
     private Integer comprobanteId;
@@ -43,5 +49,18 @@ public class ComprobanteDto {
     private Byte asociado = 0;
 
     private CuentaDto cuenta;
+
+    public String jsonify() {
+        try {
+            return JsonMapper
+                    .builder()
+                    .findAndAddModules()
+                    .build()
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return  "jsonify error {}" + e.getMessage();
+        }
+    }
 
 }
