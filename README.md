@@ -1,14 +1,13 @@
 # Eterea Isolate Service
 
 ![Java](https://img.shields.io/badge/java-24-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.6-brightgreen.svg)
 ![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-yellow.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/com.termascacheuta/eterea-isolate-service.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.termascacheuta%22%20AND%20a:%22eterea-isolate-service%22)
 
-## Novedades en la versión 0.6.0
+## Novedades en la versión 0.6.1
 
-- **Nuevo Modelo de Datos:** Se introduce `ProductDto` para mejorar la representación de datos de productos en la capa web.
-- **Documentación Mejorada:** Actualización completa de la documentación para reflejar la arquitectura y configuración actuales, incluyendo el uso de Consul.
+- **Actualización de Dependencias:** Mejora en la estabilidad y compatibilidad con Spring Boot 3.5.6 y SpringDoc OpenAPI 2.8.10.
 
 ## Overview
 Eterea Isolate Service is a lightweight, standalone Spring Boot microservice designed to run occasional or specific processes on the Eterea ecosystem without requiring a full redeployment of the main services.
@@ -26,7 +25,7 @@ This approach allows for greater flexibility and agility when performing mainten
 ## Technical Stack
 ...existing code...
 - Java 24
-- Spring Boot 3.5.3
+- Spring Boot 3.5.6
 - Spring Cloud 2025.0.0
 - Spring Cloud Consul Discovery
 - Spring Cloud OpenFeign
