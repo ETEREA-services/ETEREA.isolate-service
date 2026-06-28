@@ -10,6 +10,7 @@ graph TD
         E[import-service/api/import/orderNote]
         F[core-service/api/core/transaccionFacturaProgramaDia]
         I[core-service/api/core/comprobante]
+        J[core-service/api/core/facturacion]
     end
 
     B --> C
@@ -18,7 +19,7 @@ graph TD
     B --> F
     H --> D
     H --> I
-    H --> F
+    H --> J
 
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style B fill:#ccf,stroke:#333,stroke-width:2px
@@ -29,3 +30,4 @@ graph TD
     style E fill:#9cf,stroke:#333,stroke-width:2px
     style F fill:#9cf,stroke:#333,stroke-width:2px
     style I fill:#9cf,stroke:#333,stroke-width:2px
+    style J fill:#9cf,stroke:#333,stroke-width:2px
