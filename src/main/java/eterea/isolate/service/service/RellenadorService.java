@@ -10,11 +10,13 @@ import eterea.isolate.service.client.web.OrderNoteClient;
 import eterea.isolate.service.model.dto.ClienteMovimientoDto;
 import eterea.isolate.service.model.dto.FacturaResponseDto;
 import eterea.isolate.service.model.dto.web.OrderNoteDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class RellenadorService {
 
     private final FacturadorClient facturadorClient;
@@ -22,23 +24,16 @@ public class RellenadorService {
     private final OrderNoteClient orderNoteClient;
     private final TransaccionFacturaProgramaDiaClient transaccionFacturaProgramaDiaClient;
 
-    public RellenadorService(FacturadorClient facturadorClient, ClienteMovimientoClient clienteMovimientoClient, OrderNoteClient orderNoteClient, TransaccionFacturaProgramaDiaClient transaccionFacturaProgramaDiaClient) {
-        this.facturadorClient = facturadorClient;
-        this.clienteMovimientoClient = clienteMovimientoClient;
-        this.orderNoteClient = orderNoteClient;
-        this.transaccionFacturaProgramaDiaClient = transaccionFacturaProgramaDiaClient;
-    }
-
     public FacturaResponseDto consultaComprobante(Integer tipoAfipId, Integer puntoVenta, Long numeroComprobante) {
         return facturadorClient.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
     }
 
-    public void autoCompleta(Integer tipoAfipId, Integer puntoVenta, Long numeroComprobante, Boolean soloFactura, Boolean dryRun) {
+    public void autoCompleta(Integer tipoAfipId, Integer puntoVenta, Long numeroComprobante, Integer comprobanteId, Boolean soloFactura, Boolean dryRun) {
         log.debug("Processing RellenadorService.autoCompleta");
         var facturaArca = facturadorClient.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
         log.debug("FacturaArca -> {}", facturaArca.jsonify());
         try {
-            var clienteMovimiento = clienteMovimientoClient.findByComprobante(853, puntoVenta, numeroComprobante);
+            var clienteMovimiento = clienteMovimientoClient.findByComprobante(comprobanteId, puntoVenta, numeroComprobante);
             log.debug("ClienteMovimiento -> {}", clienteMovimiento.jsonify());
             log.debug("\n\n\nError. Comprobante encontrado\n\n\n");
             return;

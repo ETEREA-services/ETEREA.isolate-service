@@ -23,9 +23,9 @@ public class RellenadorController {
         return ResponseEntity.ok(service.consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante));
     }
 
-    @GetMapping("/auto-completa/{tipoAfipId}/{puntoVenta}/{numeroComprobante}/solo-factura/{soloFactura}/dry-run/{dryRun}")
-    public ResponseEntity<Void> autoCompleta(@PathVariable Integer tipoAfipId, @PathVariable Integer puntoVenta, @PathVariable Long numeroComprobante, @PathVariable Boolean soloFactura, @PathVariable Boolean dryRun) {
-        service.autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, soloFactura, dryRun);
+    @GetMapping("/auto-completa/{tipoAfipId}/{puntoVenta}/{numeroComprobante}/comprobante/{comprobanteId}/solo-factura/{soloFactura}/dry-run/{dryRun}")
+    public ResponseEntity<Void> autoCompleta(@PathVariable Integer tipoAfipId, @PathVariable Integer puntoVenta, @PathVariable Long numeroComprobante, @PathVariable Integer comprobanteId, @PathVariable Boolean soloFactura, @PathVariable Boolean dryRun) {
+        service.autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, comprobanteId, soloFactura, dryRun);
         return ResponseEntity.ok().build();
     }
 
