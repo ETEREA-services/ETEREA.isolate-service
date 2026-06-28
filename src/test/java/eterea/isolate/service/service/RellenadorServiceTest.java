@@ -74,11 +74,11 @@ class RellenadorServiceTest {
         doNothing().when(transaccionFacturaProgramaDiaClient).registroTransaccionFacturaProgramaDia(anyLong(), anyBoolean(), anyBoolean(), any());
 
         // When
-        rellenadorService.autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, false, false);
+        rellenadorService.autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, 1, false, false);
 
         // Then
         verify(facturadorClient).consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
-        verify(clienteMovimientoClient).findByComprobante(853, puntoVenta, numeroComprobante);
+        verify(clienteMovimientoClient).findByComprobante(1, puntoVenta, numeroComprobante);
         verify(orderNoteClient).findLastByNumeroDocumentoAndImporte(nroDoc, amount);
         verify(transaccionFacturaProgramaDiaClient).registroTransaccionFacturaProgramaDia(eq(1L), eq(false), eq(false), any(eterea.isolate.service.model.dto.core.FacturacionDto.class));
     }
@@ -107,11 +107,11 @@ class RellenadorServiceTest {
         when(orderNoteClient.findLastByNumeroDocumentoAndImporte(nroDoc, facturaArca.getFactura().getImpTotal())).thenReturn(orderNote);
 
         // When
-        rellenadorService.autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, false, false);
+        rellenadorService.autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, 1, false, false);
 
         // Then
         verify(facturadorClient).consultaComprobante(tipoAfipId, puntoVenta, numeroComprobante);
-        verify(clienteMovimientoClient).findByComprobante(853, puntoVenta, numeroComprobante);
+        verify(clienteMovimientoClient).findByComprobante(1, puntoVenta, numeroComprobante);
         verify(orderNoteClient).findLastByNumeroDocumentoAndImporte(nroDoc, facturaArca.getFactura().getImpTotal());
         verifyNoInteractions(transaccionFacturaProgramaDiaClient);
     }

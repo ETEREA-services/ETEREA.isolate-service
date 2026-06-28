@@ -59,14 +59,15 @@ class RellenadorControllerTest {
         Integer tipoAfipId = 6;
         Integer puntoVenta = 5;
         Long numeroComprobante = 4L;
+        Integer comprobanteId = 1;
         Boolean soloFactura = false;
         Boolean dryRun = true;
 
         // When & Then
-        mockMvc.perform(get("/api/isolate/rellenador/auto-completa/{tipoAfipId}/{puntoVenta}/{numeroComprobante}/solo-factura/{soloFactura}/dry-run/{dryRun}",
-                        tipoAfipId, puntoVenta, numeroComprobante, soloFactura, dryRun))
+        mockMvc.perform(get("/api/isolate/rellenador/auto-completa/{tipoAfipId}/{puntoVenta}/{numeroComprobante}/comprobante/{comprobanteId}/solo-factura/{soloFactura}/dry-run/{dryRun}",
+                        tipoAfipId, puntoVenta, numeroComprobante, comprobanteId, soloFactura, dryRun))
                 .andExpect(status().isOk());
 
-        verify(service).autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, soloFactura, dryRun);
+        verify(service).autoCompleta(tipoAfipId, puntoVenta, numeroComprobante, comprobanteId, soloFactura, dryRun);
     }
 }

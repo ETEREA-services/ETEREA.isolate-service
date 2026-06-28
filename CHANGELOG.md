@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2026-06-28
+### Fixed
+- fix(test): Corregido valor hardcodeado de `comprobanteId` en tests de `RellenadorController` y `RellenadorService` (cambiado de `853` a `1`) (Fuente: `git diff HEAD`, `RellenadorControllerTest.java`, `RellenadorServiceTest.java`)
+
 ## [0.7.0] - 2026-06-28
 ### Added
 - feat(endpoint): Nuevo parámetro `comprobanteId` en endpoint `auto-completa` para especificar el comprobante a buscar (Fuente: `git diff HEAD`, `RellenadorController.java`)

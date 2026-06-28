@@ -5,6 +5,10 @@
 ![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.1.2-yellow.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/com.termascacheuta/eterea-isolate-service.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.termascacheuta%22%20AND%20a:%22eterea-isolate-service%22)
 
+## Novedades en la versión 0.7.1
+
+- **Corrección en tests:** Valor hardcodeado de `comprobanteId` corregido de `853` a `1` en pruebas de `RellenadorController` y `RellenadorService`.
+
 ## Novedades en la versión 0.7.0
 
 - **Migración a Spring Boot 4.1.0 y Java 25:** Actualización mayor del framework base y la plataforma Java.
